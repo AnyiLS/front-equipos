@@ -6,11 +6,22 @@ const useAuthActions = () => {
   /** Services */
   const { useProviders } = useApi();
   const { useAuthProviders } = useProviders();
-  const { register, login, passwordRecovery, changeImageProfile, editInfo, getUserInfo } = useAuthProviders();
+  const { register, login, passwordRecovery, changeImageProfile, editInfo, getUserInfo, getCountries } = useAuthProviders();
 
   /** Types */
   const { useAuthTypes } = useTypes();
-  const { LOGIN } = useAuthTypes();
+  const { LOGIN, GET_COUNTRIES } = useAuthTypes();
+
+  const actGetCountries = ({ onError }) => {
+    return async dispatch => {
+      try {
+        const res = await getCountries();
+        dispatch({ type: GET_COUNTRIES, payload: res.data.data })
+      } catch (error) {
+        onError && onError(error)
+      }
+    }
+  }
 
   const actLogin =
     ({ data, onSuccess, onError }) =>
@@ -124,7 +135,8 @@ const useAuthActions = () => {
     actChangeImageProfile,
     actEditInfo,
     actLogout,
-    actGetUserInfo
+    actGetUserInfo,
+    actGetCountries
   };
 };
 

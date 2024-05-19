@@ -8,6 +8,8 @@ import useRouter from "routes";
 import "./index.css";
 // import { usePromiseTracker } from "react-promise-tracker";
 import Loading from "./components/Loading";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   /** Routes */
@@ -25,6 +27,7 @@ const App = () => {
       <Provider store={store}>
         <PersistGate persistor={persistor}>
           {Router}
+          <ToastContainer/>
         </PersistGate>
       </Provider>
     </React.Suspense>

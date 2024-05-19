@@ -2,6 +2,11 @@ import axios from "axios"
 import { trackPromise } from "react-promise-tracker"
 
 const useAuthProviders = () => {
+    const getCountries = () => {
+        const request = axios.get('/auth/get-countries');
+        return trackPromise(request);
+    }
+
     const register = (data) => {
         const request = axios({
             url: "/auth/register",
@@ -67,7 +72,8 @@ const useAuthProviders = () => {
         passwordRecovery,
         changeImageProfile,
         editInfo,
-        getUserInfo
+        getUserInfo,
+        getCountries
     }
 }
 

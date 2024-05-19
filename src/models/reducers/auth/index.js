@@ -8,7 +8,7 @@ const useAuthReducers = () => {
 
     /** Types */
     const { useAuthTypes } = useTypes();
-    const { LOGIN } = useAuthTypes();
+    const { LOGIN, GET_COUNTRIES } = useAuthTypes();
 
     /** Reducers */
     const login = createReducer({login: {}}, {
@@ -19,8 +19,13 @@ const useAuthReducers = () => {
         }
     });
 
+    const countries = createReducer({countries: []}, {
+        [GET_COUNTRIES]: (state, action) => ({ ...state, countries: action.payload })
+    })
+
     return {
         login,
+        countries
     }
 }
 

@@ -11,8 +11,14 @@ const useAuthSelectors = () => {
         (login) => login
     );
 
+    const countriesSelector = createSelector(
+        (state) => state.countries,
+        (countries) => countries.countries
+    )
+
     return {
-        loginSelector
+        loginSelector,
+        countriesSelector
     };
 }
 

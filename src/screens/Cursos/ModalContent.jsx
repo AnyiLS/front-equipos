@@ -40,6 +40,7 @@ const QuizComponent = ({ data, id, content, onClose, module, course }) => {
                     <h2>
                         {data.questions && data.questions[question].question}
                     </h2>
+                    <img src={data.questions ? data.questions[question].image : ''} alt="" />
                 </div>
                 <div className="card-right">
                     <div

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import useApi from "api";
 import useModels from "models";
 import useHelpers from "helpers";
+import { toast } from "react-toastify";
 
 const useRegister = () => {
     /** Variable */
@@ -14,13 +15,14 @@ const useRegister = () => {
     /** Api */
     const { useActions } = useApi();
     const { dispatch, useAuthActions } = useActions();
-    const { actRegister } = useAuthActions();
+    const { actRegister, actGetCountries } = useAuthActions();
 
     /** Models */
     const { useSelectors } = useModels();
     const { useSelector, useAuthSelectors } = useSelectors();
-    const { loginSelector } = useAuthSelectors();
+    const { loginSelector, countriesSelector } = useAuthSelectors();
     const login = useSelector(loginSelector);
+    const countries = useSelector(countriesSelector);
 
     /** Helpers */
     const { useValidators } = useHelpers();
@@ -29,9 +31,10 @@ const useRegister = () => {
 
     /** States */
     const [error, setErrors] = useState("");
+    const [country, setCountry] = React.useState({value: 0, label: ''})
 
     /** Use Form */
-    const { register, handleSubmit, reset, setError } = useForm({
+    const { register, handleSubmit, reset, setError, setValue, formState: {errors, isValid} } = useForm({
         mode: "onChange",
     });
 
@@ -113,33 +116,33 @@ const useRegister = () => {
      * Otherwise, it informs that an error occurred when registering the user.
      * @returns {void}
      */
-    const handleSentRegister = handleSubmit((data) => {
-        let validateDatas = validateData(data);
-
-        if (validateDatas) {
-            dispatch(
-                actRegister({
-                    onError: (error) => {
-                        Swal.fire({
-                            icon: "error",
-                            title: "En el registro!",
-                            text: `Ocurrio un problema en el momento de realizar el registro: ${error}`,
-                        });
-                    },
-                    onSuccess: () => {
-                        Swal.fire({
-                            icon: "success",
-                            title: "Registro exitoso!",
-                        });
-
+    const handleSentRegister = (data) => {
+        if (country.value === 0) setError('country', {type: 'validate', message: 'El campo es requerido.'})
+        if (isValid) {
+            dispatch(actRegister({
+                onError: (error) => {
+                    toast.error('Ocurrio un problema al momento de realizar el registro.');
+                    console.error(error);
+                },
+                onSuccess: () => {
+                    toast.success('Registro existoso.')
+                    setTimeout(() => {
                         reset({});
                         window.location.href = "/login"
-                    },
-                    data,
-                })
-            );
+                    }, 3000)
+                },
+                data: {...data, country: country.value}
+            }))
         }
-    });
+    };
+
+    const handleGetCountries = React.useCallback(() => {
+        dispatch(actGetCountries({ onError: (error) => {
+            toast.error('Ocurrio un problema al obtener los paises!'); 
+            console.error(error);
+        }}))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     /** Effects */
     useEffect(() => {
@@ -148,10 +151,18 @@ const useRegister = () => {
         }
     }, [login]);
 
+    React.useEffect(() => {
+        handleGetCountries();
+    }, [handleGetCountries])
+
     return {
         register,
         error,
         handleSentRegister,
+        setCountry,
+        errors,
+        handleSubmit,
+        countries,
     };
 };
 
