@@ -35,36 +35,62 @@ const Cursos = () => {
         switch (value) {
             case 1:
                 document.getElementById("tab-2").classList.remove("active-tab");
-                document.getElementById("tab-3").classList.remove("active-tab");
+                if (document.getElementById('tab-3')) {
+                    document.getElementById("tab-3").classList.remove("active-tab");
+                }
+                if (document.getElementById('tab-3')) {
+                    document.getElementById("tab-3").classList.add("tab-normal");
+                }
+                if (document.getElementById("panel-3")) {
+                    document.getElementById("panel-3").classList.remove("active");
+                }
                 document.getElementById("tab-1").classList.remove("tab-normal");
                 document.getElementById("tab-1").classList.add("active-tab");
                 document.getElementById("tab-2").classList.add("tab-normal");
-                document.getElementById("tab-3").classList.add("tab-normal");
+                
                 document.getElementById("panel-1").classList.add("active");
                 document.getElementById("panel-2").classList.remove("active");
-                document.getElementById("panel-3").classList.remove("active");
+                
                 break;
             case 2:
                 document.getElementById("tab-1").classList.remove("active-tab");
-                document.getElementById("tab-3").classList.remove("active-tab");
+                if (document.getElementById('tab-3')) {
+                    document.getElementById("tab-3").classList.remove("active-tab");
+                }
+                if (document.getElementById('tab-3')) {
+                    document.getElementById("tab-3").classList.add("tab-normal");
+                }
+                if (document.getElementById("panel-3")) {
+                    document.getElementById("panel-3").classList.remove("active");
+                }
+                
                 document.getElementById("tab-2").classList.remove("tab-normal");
                 document.getElementById("tab-2").classList.add("active-tab");
                 document.getElementById("tab-1").classList.add("tab-normal");
-                document.getElementById("tab-3").classList.add("tab-normal");
+                
                 document.getElementById("panel-1").classList.remove("active");
                 document.getElementById("panel-2").classList.add("active");
-                document.getElementById("panel-3").classList.remove("active");
+                
                 break;
             case 3:
+                if (document.getElementById('tab-3')) {
+                    document.getElementById("tab-3").classList.remove("tab-normal");
+                }
+                if (document.getElementById('tab-3')) {
+                    document.getElementById("tab-3").classList.add("active-tab");
+                }
+                if (document.getElementById("panel-3")) {
+                    document.getElementById("panel-3").classList.add("active");
+                }
                 document.getElementById("tab-1").classList.remove("active-tab");
                 document.getElementById("tab-2").classList.remove("active-tab");
-                document.getElementById("tab-3").classList.remove("tab-normal");
-                document.getElementById("tab-3").classList.add("active-tab");
+                
+                
                 document.getElementById("tab-1").classList.add("tab-normal");
                 document.getElementById("tab-2").classList.add("tab-normal");
                 document.getElementById("panel-1").classList.remove("active");
                 document.getElementById("panel-2").classList.remove("active");
-                document.getElementById("panel-3").classList.add("active");
+                
                 break;
 
             default:
