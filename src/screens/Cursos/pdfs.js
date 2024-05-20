@@ -105,6 +105,10 @@ const VidasPdfs = [
         module: 3
     },
     {
+        pdf: "https://api.elearningclinicalbmxsystems.com/dowloadpdf/CalibraciónreactivosVIDAS.pdf",
+        module: 4
+    },
+    {
         pdf: "https://api.elearningclinicalbmxsystems.com/dowloadpdf/importanciafasepreanaltica.pdf",
         module: 5
     },
@@ -138,6 +142,10 @@ const Vidas3Pdfs = [
         module: 3
     },
     {
+        pdf: "https://api.elearningclinicalbmxsystems.com/dowloadpdf/CalibraciónreactivosVIDAS.pdf",
+        module: 4
+    },
+    {
         pdf: "https://api.elearningclinicalbmxsystems.com/dowloadpdf/importanciafasepreanaltica.pdf",
         module: 5
     },
@@ -167,6 +175,10 @@ const MiniVidasPdfs = [
     {
         pdf: "https://api.elearningclinicalbmxsystems.com/dowloadpdf/3conceptoVIDAS.pdf",
         module: 3
+    },
+    {
+        pdf: "https://api.elearningclinicalbmxsystems.com/dowloadpdf/CalibraciónreactivosVIDAS.pdf",
+        module: 4
     },
     {
         pdf: "https://api.elearningclinicalbmxsystems.com/dowloadpdf/importanciafasepreanaltica.pdf",
